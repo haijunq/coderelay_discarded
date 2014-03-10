@@ -37,7 +37,7 @@ public class Target {
         this.y = y;
     } 
     
-    public void print(String str) {
-        System.out.println("Target " + str + ":\t" + "(" + this.x + ", " + this.y + ")");
+    public void print() {
+        System.out.print("(" + this.x + ", " + this.y + ")");
     }
 }

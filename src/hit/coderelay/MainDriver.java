@@ -14,6 +14,8 @@ import java.util.ArrayList;
  *
  */
 public class MainDriver {
+    private static final String BIN_FOLER = "../bin/";
+    private static final String PACKAGENAME = "hit.coderelay.";
 
     /**
      * @param args
@@ -34,11 +36,11 @@ public class MainDriver {
         
         try {
             // the .class file folder
-            File classFile = new File("../bin/");
+            File classFile = new File(BIN_FOLER);
             
             // the class name of the previous class
-            String className = "hit.coderelay.ClassA";
-            
+            String className = PACKAGENAME + Utils.readClassName();
+
             // load and instantiate it. 
             URLClassLoader classLoader = new URLClassLoader(new URL[]{classFile.toURI().toURL()});
             Class<?> clazz = classLoader.loadClass(className);
@@ -48,11 +50,14 @@ public class MainDriver {
             Method [] methods = clazz.getMethods(); 
             
             for (Target t : targets) {
-                t.print("before");
-                
+                t.print();
+                System.out.print(" -> ");
+
                 // invoke the method on targets
                 methods[0].invoke(instance, t);
-                t.print(" after");
+                
+                t.print();
+                System.out.println();
             }            
             
         } catch (Exception e) {
